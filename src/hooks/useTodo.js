@@ -12,6 +12,7 @@ export default function useTodo() {
   const [newRadio, setRadio] = useState(true);
   const [newSelect, setSelect] = useState(1);
   const [newEdit, setEdit] = useState(null);
+  const [show, setShowAll] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(allTodos));
@@ -32,7 +33,7 @@ export default function useTodo() {
     } else {
       const updatedTodo = [
         ...allTodos,
-        { id, newTitle, newDescription, newDate, newStatus, newRadio, newSelect }
+        { id, newTitle, newDescription, newDate, newStatus, newRadio, newSelect, show }
       ];
       setTodos(updatedTodo);
     }
@@ -79,11 +80,13 @@ export default function useTodo() {
     }
   };
 
+
   return {
     allTodos,
     newTitle,
     newDescription,
     newDate,
+    show,
     handleAddTodo,
     removeTodo,
     handleCheckbox,
@@ -92,6 +95,7 @@ export default function useTodo() {
     editTodo,
     setNewTitle,
     setNewDescription,
-    setNewDate
+    setNewDate,
+    setShowAll
   };
 }

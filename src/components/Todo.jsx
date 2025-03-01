@@ -10,6 +10,7 @@ const Todo = () => {
     newTitle,
     newDescription,
     newDate,
+    show,
     handleAddTodo,
     removeTodo,
     handleCheckbox,
@@ -18,16 +19,18 @@ const Todo = () => {
     editTodo,
     setNewTitle,
     setNewDescription,
-    setNewDate
+    setNewDate,
+    setShowAll
   } = useTodo();
 
+  const isHidden = allTodos.slice(0,3);
   const todos_completed = allTodos.filter(todo => todo.newStatus === true).length;
   const total_todos = allTodos.length;
 
   console.log(allTodos);
 
   return (
-    <div className="h-64 w-full bg-white/50 backdrop-blur-md border border-white/20 place-self-center w-14/15 max-w-4xl flex flex-col p-7 min-h-[550px] rounded-lg shadow-md">
+    <div className="w-full bg-white/50 backdrop-blur-md border border-white/20 place-self-center w-14/15 max-w-4xl flex flex-col flex-grow p-7 min-h-[550px] rounded-lg shadow-md">
       <div className="flex items-center mt-7 gap-2">
         <img src={todoTick} className="w-7 h-7" alt="Todo Tick" />
         <h1 className="text-4xl font-semibold">ToDoList</h1>
@@ -68,10 +71,12 @@ const Todo = () => {
         >
           ADD +
         </button>
+        
       </div>
 
-      <div>
-        {allTodos.map(item => (
+      <div className="flex-1 overflow-hidden">
+       
+        { (show ? isHidden : allTodos).map(item => (
           <TodoItems
             key={item.id}
             index={item.id}
@@ -86,10 +91,23 @@ const Todo = () => {
             option={item.newRadio}
             handleRadio={handleRadio}
             editTodo={editTodo}
-          />
+          /> 
         ))}
       </div>
+      <div className="flex justify-center items-center mt-auto">
+        {total_todos > 3 && 
+           <button
+           onClick={() => setShowAll(!show)}
+           className="px-2 py-2 bg-blue-900 text-white rounded-lg shadow-lg 
+           hover:bg-blue-700 transition duration-300"
+         >
+           {show ? "Show More" : "Show Less"}
+         </button>
+        }
+       
+        </div>
     </div>
+    
   );
 };
 
