@@ -11,10 +11,10 @@ const TodoItems = (
      editTodo
     }) => {
   return (
-    <div className='flex items-center my-3 gap-2 shadow-md rounded-lg' key={index}>
+    <div className= {`flex bg-white/70 items-center my-3 gap-2 shadow-md rounded-lg ${status ? "bg-gray-300 opacity-50" : "bg-white"}`} key={index}>
 
         <div className = 'flex flex-1 items-center cursor-pointer'>
-            <input type="checkbox" className="w-5 h-5 text-blue-500      ml-8 accent-lime-700 w-5 h-5"
+            <input type="checkbox" className="w-5 h-5 text-blue-500  ml-8 accent-blue-700 w-5 h-5"
             checked= {status} onChange={(e) => handleCheck(e,index)}
              />
 
@@ -42,7 +42,7 @@ const TodoItems = (
                     checked={true === option}
                     value= {true}
                      onChange = {(e) => handleRadio(e,index)}
-                     className="accent-lime-700 w-5 h-5"
+                     className="accent-blue-700 w-5 h-5"
                      />
                     <span className='ml-5'>Not started</span>
                 </label>
@@ -51,7 +51,7 @@ const TodoItems = (
                      checked= {false === option} 
                      value= {false}
                      onChange = {(e) => handleRadio(e,index)} 
-                     className="accent-lime-700 w-5 h-5"
+                     className="accent-blue-700 w-5 h-5"
                      />
                     <span className='ml-5'>In progress</span>
                 </label>
