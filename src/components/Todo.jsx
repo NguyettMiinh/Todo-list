@@ -30,7 +30,7 @@ const Todo = () => {
     <div className="h-64 w-full bg-white/50 backdrop-blur-md border border-white/20 place-self-center w-14/15 max-w-4xl flex flex-col p-7 min-h-[550px] rounded-lg shadow-md">
       <div className="flex items-center mt-7 gap-2">
         <img src={todoTick} className="w-6 h-6" alt="Todo Tick" />
-        <h1 className="text-3xl font-semibold">ToDo List</h1>
+        <h1 className="text-3xl font-semibold">ToDoList</h1>
       </div>
       <div>
         <TodoCount todos_completed={todos_completed} total_todos={total_todos} />

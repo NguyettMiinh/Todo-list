@@ -5,7 +5,7 @@ const TodoCount = ({todos_completed,total_todos}) => {
     <section>
         <div className=''>
             <div>
-                <p className=' ml-[45px] text-slate-600  font-semibold'>Task Done</p>
+                <p className=' ml-[35px] text-slate-600  font-semibold'>Task Done</p>
             </div>
             <div className='ml-[50px] text-slate-600 font-semibold'>
                 {todos_completed} / {total_todos}
