@@ -38,7 +38,7 @@ const Todo = () => {
 
       <div className="flex items-center my-7 bg-gray-200 rounded-full">
         <input
-          className="bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-7700"
+          className="bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-700"
           type="text"
           placeholder="Task name"
           value={newTitle}
@@ -46,7 +46,7 @@ const Todo = () => {
         />
 
         <input
-          className="bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-7700"
+          className="bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-700"
           type="text"
           placeholder="Description"
           value={newDescription}
