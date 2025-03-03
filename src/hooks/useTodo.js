@@ -64,7 +64,7 @@ export default function useTodo() {
 
   const handleSelect = (e, id) => {
     const selected = Number(e.target.value);
-    setSelect(selected);
+    // setSelect(selected);
     setTodos(prev =>
       prev.map(todo => (todo.id === id ? { ...todo, newSelect: selected } : todo))
     );
