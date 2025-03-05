@@ -2,8 +2,10 @@ import React from "react";
 import TodoItems from "./TodoItems";
 import todoTick from "../assets/images/todo-tick.svg";
 import { v4 as uuidv4 } from "uuid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import InputText from "./InputText";
+import InputRadio from "./InputRadio";
+import Button from "./Button";
 
 const Todo = () => {
   const [form, setForm] = useState({
@@ -68,9 +70,8 @@ const Todo = () => {
     }
   };
 
-  const handleChange = () => {
-    setValue(!value);
-  };
+
+  console.log(todoList);
 
   return (
     <div
@@ -84,30 +85,14 @@ const Todo = () => {
 
       <div className="flex items-center my-7 bg-gray-200 rounded-full">
         <InputText type= "text" value={form.title} 
+        className= "bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-700"
         placeholder = "Task name" setForm={setForm}  name= "title"/>
         <InputText type= "text" value={form.description} 
+         className= "bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-700"
         placeholder = "Description" setForm={setForm} name= "description" />
-
-        {/* <input
-          className="bg-transparent border-0 outline-none
-           flex-1 h-10 pl-6 pr-2 text-slate-700"
-          type="text"
-          placeholder="Description"
-          value={form.description}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, description: e.target.value }))
-          }
-        /> */}
-
-        <input
-          className="bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-500"
-          type="date"
-          placeholder="Due date"
-          value={form.date}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, date: e.target.value }))
-          }
-        />
+        <InputText type= "date" value={form.date} 
+          className= "bg-transparent border-0 outline-none flex-1 h-10 pl-6 pr-2 text-slate-500"
+         setForm={setForm} name= "date" />
 
         <label className="ml-7 text-slate-700 ">
           <span className="font-bold text-xs">Priority</span> <br />
@@ -123,36 +108,14 @@ const Todo = () => {
           </select>
         </label>
 
-        <label className="mr-10">
-          
-          <input
-            type="radio"
-            name="radio"
-            value={form.radio}
-            onChange={(e) => setForm((prev) => ({ ...prev, radio: true }))}
-            className="accent-blue-700 w-5 h-5"
-          />
-          <span className="ml-5">Not started</span>
-        </label>
-        <label className="mr-10">
-          <input
-            type="radio"
-            name="radio"
-            value={!form.radio}
-            onChange={(e) => setForm((prev) => ({ ...prev, radio: false }))}
-            className="accent-blue-700 w-5 h-5"
-          />
-          <span className="ml-5">Pending</span>
-        </label>
+        <InputRadio setForm={setForm} content= "Not started" value={form.radio} radioValue={true}/>
+        <InputRadio setForm={setForm} content= "Pending" value={!form.radio} radioValue={false}/>
 
-        <button
-          type="button"
-          className="border-none rounded-full bg-blue-900 w-32 
+        <Button  className="border-none rounded-full bg-blue-900 w-32 
           h-10 text-white text-lg font-medium cursor-pointer"
           onClick={edit ? Edit : Add}
-        >
-          {edit !== null ? "UPDATE" : "CREATE"}
-        </button>
+          content= {edit !== null ? "UPDATE" : "CREATE"}
+          />
       </div>
 
       <div className="flex-1 overflow-hidden">

@@ -1,20 +1,19 @@
-import React from 'react'
+import React from "react";
 
-const InputText = ({valueText,type, setForm, placeholder,name}) => {
+const InputText = ({ value, type, setForm, placeholder, name, className }) => {
   return (
     <div>
       <input
-          className="bg-transparent border-0 outline-none 
-          flex-1 h-10 pl-6 pr-2 text-slate-700"
-          type= {type}
-          placeholder= {placeholder}
-          value={valueText}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, [name]: e.target.value }))
-          }
-        />
+        className={className}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) =>
+          setForm((prev) => ({ ...prev, [name]: e.target.value }))
+        }
+      />
     </div>
-  )
-}
+  );
+};
 
-export default InputText
+export default InputText;

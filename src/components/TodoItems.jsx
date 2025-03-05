@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const TodoItems = ({ removeTodo, handleCheck, editTodo, form }) => {
   return (
@@ -54,12 +55,14 @@ const TodoItems = ({ removeTodo, handleCheck, editTodo, form }) => {
         </div>
       </div>
 
-      <button onClick={() => removeTodo(form.id)}>
-        <i className="bx bx-trash text-2xl text-slate-700"></i>
-      </button>
-      <button onClick={() => editTodo(form.id)}>
-        <i className="bx bx-edit-alt mr-5 text-2xl text-slate-700"></i>
-      </button>
+      <Button className = "text-2xl text-slate-700" 
+      onClick={() => removeTodo(form.id)}
+      content={<i className="bx bx-trash text-2xl text-slate-700"></i>}
+      />
+      <Button className = "text-2xl text-slate-700 mr-5" 
+      onClick={() => editTodo(form.id)}
+      content={<i className="bx bx-edit-alt"></i>}
+      />
     </div>
   );
 };
