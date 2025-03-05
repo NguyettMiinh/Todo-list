@@ -9,62 +9,68 @@ export default function useTodo() {
   const [newDescription, setNewDescription] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newStatus, setStatus] = useState(false);
-  const [newRadio, setRadio] = useState(true);
+  const [newRadio, setRadio] = useState("");
   const [newSelect, setSelect] = useState(1);
   const [newEdit, setEdit] = useState(null);
   const [show, setShowAll] = useState(true);
+  const [newBtn, setBtn] =useState("CREATE");
+
+
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(allTodos));
   }, [allTodos]);
 
-  const handleAddTodo = () => {
-    const maxId = allTodos.length > 0 ? Math.max(...allTodos.map(todo => todo.id)) : 0;
-    const id = maxId + 1;
+  // const handleAddTodo = () => {
+  //   const maxId = allTodos.length > 0 ? Math.max(...allTodos.map(todo => todo.id)) : 0;
+  //   const id = maxId + 1;
 
-    if (newEdit) {
-      const updatedEdit = allTodos.map(todo =>
-        todo.id === newEdit
-          ? { ...todo, newTitle, newDescription, newDate }
-          : todo
-      );
-      setTodos(updatedEdit);
-      setEdit(null);
-    } else {
-      const updatedTodo = [
-        ...allTodos,
-        { id, newTitle, newDescription, newDate, newStatus, newRadio, newSelect, show }
-      ];
-      setTodos(updatedTodo);
-    }
+  //   if (newEdit) {
+  //     const updatedEdit = allTodos.map(todo =>
+  //       todo.id === newEdit
+  //         ? { ...todo, newTitle, newDescription, newDate, newSelect, newRadio }
+  //         : todo
+  //     );
+  //     setTodos(updatedEdit);
+  //     setEdit(null);
+  //   } else {
+  //     const updatedTodo = [
+  //       ...allTodos,
+  //       { id, newTitle, newDescription, newDate, newStatus, newRadio, newSelect, show }
+  //     ];
+  //     setTodos(updatedTodo);
+  //   }
 
-    setNewDate("");
-    setNewDescription("");
-    setNewTitle("");
-  };
+  //   setBtn("CREATE");
+  //   setNewDate("");
+  //   setNewDescription("");
+  //   setNewTitle("");
+  // };
 
   const removeTodo = id => {
-    const reducedTodo = allTodos.filter(todo => todo.id !== id);
-    setTodos(reducedTodo);
+    const result = confirm("Do you want to delete?");
+    if (result){
+      const reducedTodo = allTodos.filter(todo => todo.id !== id);
+      setTodos(reducedTodo);
+    }
+   
   };
 
   const handleCheckbox = (e, id) => {
     const status = e.target.checked;
+    
     setTodos(prev =>
       prev.map(todo => (todo.id === id ? { ...todo, newStatus: status } : todo))
     );
   };
 
-  const handleRadio = (e, id) => {
+  const handleRadio = (e) => {
     const radioSelect = JSON.parse(e.target.value);
-    setTodos(prev =>
-      prev.map(todo => (todo.id === id ? { ...todo, newRadio: radioSelect } : todo))
-    );
+    setRadio(radioSelect);
   };
 
   const handleSelect = (e, id) => {
     const selected = Number(e.target.value);
-    // setSelect(selected);
     setTodos(prev =>
       prev.map(todo => (todo.id === id ? { ...todo, newSelect: selected } : todo))
     );
@@ -76,7 +82,11 @@ export default function useTodo() {
       setNewTitle(findTodo.newTitle);
       setNewDescription(findTodo.newDescription);
       setNewDate(findTodo.newDate);
+      setSelect(findTodo.newSelect);
+      setRadio(findTodo.newRadio);
+      
       setEdit(id);
+      setBtn("UPDATE");
     }
   };
 
@@ -87,7 +97,9 @@ export default function useTodo() {
     newDescription,
     newDate,
     show,
-    handleAddTodo,
+    newSelect,
+    newBtn,
+    newRadio,
     removeTodo,
     handleCheckbox,
     handleRadio,
@@ -96,6 +108,9 @@ export default function useTodo() {
     setNewTitle,
     setNewDescription,
     setNewDate,
-    setShowAll
+    setShowAll,
+    setSelect,
+    setBtn,
+    setRadio
   };
 }
